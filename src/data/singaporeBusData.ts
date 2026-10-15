@@ -1,0 +1,556 @@
+import { BusStop, BusRouteDetails, BusLoad, BusType, BusFeature, BusOperator } from '../types/bus';
+
+// Real Singapore bus stops with official 5-digit codes and coordinates
+export const SINGAPORE_BUS_STOPS: BusStop[] = [
+  // Central / Bugis / Bras Basah / City Hall
+  {
+    BusStopCode: '01012',
+    RoadName: 'Victoria St',
+    Description: 'Hotel Grand Pacific',
+    Latitude: 1.296838,
+    Longitude: 103.852936,
+    Services: ['2', '7', '12', '32', '33', '51', '61', '63', '80', '145', '175', '197'],
+    Zone: 'Central',
+  },
+  {
+    BusStopCode: '01112',
+    RoadName: 'Victoria St',
+    Description: 'Bugis Stn Exit A',
+    Latitude: 1.300649,
+    Longitude: 103.856012,
+    Services: ['2', '12', '33', '130', '133', '960', '960e', '980'],
+    Zone: 'Central',
+  },
+  {
+    BusStopCode: '01013',
+    RoadName: 'Victoria St',
+    Description: 'Opp Bugis Junction',
+    Latitude: 1.299587,
+    Longitude: 103.855218,
+    Services: ['2', '12', '33', '130', '133', '960'],
+    Zone: 'Central',
+  },
+  {
+    BusStopCode: '04121',
+    RoadName: 'Bras Basah Rd',
+    Description: 'NTUC Income Ctr',
+    Latitude: 1.296615,
+    Longitude: 103.850987,
+    Services: ['7', '14', '16', '36', '77', '106', '111', '131', '147', '166', '174', '857'],
+    Zone: 'Central',
+  },
+  {
+    BusStopCode: '04111',
+    RoadName: 'Bras Basah Rd',
+    Description: 'Dhoby Ghaut Stn Exit B',
+    Latitude: 1.298711,
+    Longitude: 103.846543,
+    Services: ['7', '14', '16', '36', '77', '106', '111', '124', '167', '174', '190'],
+    Zone: 'Central',
+  },
+  {
+    BusStopCode: '04168',
+    RoadName: 'Stamford Rd',
+    Description: 'SMU',
+    Latitude: 1.295244,
+    Longitude: 103.850125,
+    Services: ['7', '14', '16', '36', '77', '106', '111', '124', '167', '174', '190'],
+    Zone: 'Central',
+  },
+  {
+    BusStopCode: '02049',
+    RoadName: 'Raffles Ave',
+    Description: 'The Esplanade',
+    Latitude: 1.289712,
+    Longitude: 103.856711,
+    Services: ['36', '56', '70M', '77', '97', '106', '111', '133', '162M', '195', '960'],
+    Zone: 'Central',
+  },
+  {
+    BusStopCode: '03509',
+    RoadName: 'Bayfront Ave',
+    Description: 'Marina Bay Sands Theatre',
+    Latitude: 1.284145,
+    Longitude: 103.859612,
+    Services: ['97', '106', '133', '502', '518'],
+    Zone: 'Central',
+  },
+
+  // Orchard / Somerset
+  {
+    BusStopCode: '09048',
+    RoadName: 'Orchard Rd',
+    Description: 'Orchard Stn / Lucky Plaza',
+    Latitude: 1.304192,
+    Longitude: 103.834152,
+    Services: ['7', '14', '16', '65', '106', '111', '123', '175', '502'],
+    Zone: 'Central',
+  },
+  {
+    BusStopCode: '09038',
+    RoadName: 'Orchard Rd',
+    Description: 'Opp Mandarin Orchard',
+    Latitude: 1.302315,
+    Longitude: 103.836814,
+    Services: ['7', '14', '16', '65', '106', '111', '123', '175', '502'],
+    Zone: 'Central',
+  },
+  {
+    BusStopCode: '08138',
+    RoadName: 'Orchard Rd',
+    Description: 'Somerset Stn',
+    Latitude: 1.300624,
+    Longitude: 103.838914,
+    Services: ['7', '14', '16', '65', '106', '111', '123', '174', '175', '190', '502'],
+    Zone: 'Central',
+  },
+  {
+    BusStopCode: '08057',
+    RoadName: 'Orchard Rd',
+    Description: 'Dhoby Ghaut Stn',
+    Latitude: 1.299214,
+    Longitude: 103.844912,
+    Services: ['7', '14', '16', '36', '65', '77', '106', '111', '124', '167', '174', '190'],
+    Zone: 'Central',
+  },
+
+  // CBD / Chinatown / Raffles Place
+  {
+    BusStopCode: '03011',
+    RoadName: 'Collyer Quay',
+    Description: 'Ocean Financial Ctr',
+    Latitude: 1.283124,
+    Longitude: 103.852412,
+    Services: ['10', '57', '70', '100', '107', '130', '131', '167', '196'],
+    Zone: 'Central',
+  },
+  {
+    BusStopCode: '05013',
+    RoadName: 'New Bridge Rd',
+    Description: 'Chinatown Stn Exit E',
+    Latitude: 1.284752,
+    Longitude: 103.844318,
+    Services: ['2', '12', '33', '54', '61', '143', '147', '190'],
+    Zone: 'Central',
+  },
+  {
+    BusStopCode: '04222',
+    RoadName: 'Eu Tong Sen St',
+    Description: 'Clarke Quay Stn Exit E',
+    Latitude: 1.288514,
+    Longitude: 103.847124,
+    Services: ['2', '12', '33', '54', '61', '147', '190'],
+    Zone: 'Central',
+  },
+
+  // West / Jurong East / Clementi
+  {
+    BusStopCode: '28009',
+    RoadName: 'Jurong Gateway Rd',
+    Description: 'Jurong East Temp Int',
+    Latitude: 1.333145,
+    Longitude: 103.742318,
+    Services: ['41', '49', '51', '52', '66', '78', '79', '97', '98', '105', '143', '160', '183', '197', '333', '334', '335', '506'],
+    Zone: 'West',
+  },
+  {
+    BusStopCode: '28301',
+    RoadName: 'Jurong Gateway Rd',
+    Description: 'Opp Jem',
+    Latitude: 1.334124,
+    Longitude: 103.744152,
+    Services: ['49', '98', '98M', '99', '198', '333', '502'],
+    Zone: 'West',
+  },
+  {
+    BusStopCode: '17179',
+    RoadName: 'Commonwealth Ave West',
+    Description: 'Clementi Stn Exit A',
+    Latitude: 1.315214,
+    Longitude: 103.765124,
+    Services: ['14', '52', '96', '105', '147', '154', '165', '166', '175', '196', '285'],
+    Zone: 'West',
+  },
+  {
+    BusStopCode: '11389',
+    RoadName: 'North Buona Vista Rd',
+    Description: 'Buona Vista Stn Exit C',
+    Latitude: 1.307124,
+    Longitude: 103.790412,
+    Services: ['74', '91', '92', '95', '100', '105', '111', '147', '191', '196', '198', '200'],
+    Zone: 'West',
+  },
+
+  // East / Bedok / Tampines / Changi
+  {
+    BusStopCode: '84009',
+    RoadName: 'Bedok Nth Ave 1',
+    Description: 'Bedok Int',
+    Latitude: 1.324128,
+    Longitude: 103.929814,
+    Services: ['7', '9', '14', '16', '17', '18', '26', '30', '32', '33', '35', '38', '40', '60', '66', '69', '87', '168', '196', '197', '222', '225', '228', '229'],
+    Zone: 'East',
+  },
+  {
+    BusStopCode: '75009',
+    RoadName: 'Tampines Ave 7',
+    Description: 'Tampines Concourse Int',
+    Latitude: 1.356124,
+    Longitude: 103.943187,
+    Services: ['18', '39', '65', '67', '68', '129', '293'],
+    Zone: 'East',
+  },
+  {
+    BusStopCode: '95029',
+    RoadName: 'PTB2 Basement',
+    Description: 'Changi Airport PTB2',
+    Latitude: 1.356512,
+    Longitude: 103.989124,
+    Services: ['24', '27', '34', '36', '53', '110', '858'],
+    Zone: 'East',
+  },
+  {
+    BusStopCode: '92049',
+    RoadName: 'Marine Parade Rd',
+    Description: 'Parkway Parade',
+    Latitude: 1.302148,
+    Longitude: 103.905142,
+    Services: ['15', '31', '36', '43', '48', '135', '196', '197', '966'],
+    Zone: 'East',
+  },
+
+  // North / Woodlands / Bishan
+  {
+    BusStopCode: '46009',
+    RoadName: 'Woodlands Sq',
+    Description: 'Woodlands Temp Int',
+    Latitude: 1.437128,
+    Longitude: 103.786512,
+    Services: ['161', '168', '169', '178', '187', '856', '900', '901', '903', '911', '912', '913', '925', '960', '961', '962', '963', '964', '965', '966', '969'],
+    Zone: 'North',
+  },
+  {
+    BusStopCode: '53009',
+    RoadName: 'Bishan St 13',
+    Description: 'Bishan Int',
+    Latitude: 1.350814,
+    Longitude: 103.850124,
+    Services: ['50', '52', '53', '54', '55', '56', '57', '58', '59', '410G', '410W'],
+    Zone: 'North',
+  },
+];
+
+// Presets for quick switching location simulation
+export const SINGAPORE_LOCATIONS = [
+  { name: 'Bugis / Victoria St', lat: 1.2995, lng: 103.8552, description: 'Bugis Junction & Downtown Line' },
+  { name: 'Orchard Rd / Somerset', lat: 1.3023, lng: 103.8368, description: 'Shopping district hub' },
+  { name: 'Marina Bay / City Hall', lat: 1.2897, lng: 103.8567, description: 'Esplanade & Marina Bay Sands' },
+  { name: 'Jurong East Interchange', lat: 1.3331, lng: 103.7423, description: 'Major Western transport terminal' },
+  { name: 'Bedok Interchange', lat: 1.3241, lng: 103.9298, description: 'Eastern transit gateway' },
+  { name: 'Woodlands Interchange', lat: 1.4371, lng: 103.7865, description: 'Northern cross-border transit hub' },
+];
+
+// Detailed Route Info for selected Singapore Bus Services
+export const DETAILED_ROUTES: Record<string, BusRouteDetails> = {
+  '190': {
+    ServiceNo: '190',
+    Operator: 'SMRT',
+    Direction: 1,
+    Origin: 'Choa Chu Kang Int',
+    Destination: 'Kampong Bahru Ter',
+    Category: 'Trunk',
+    OperatingHours: {
+      weekday: '05:30 - 23:45',
+      saturday: '05:30 - 23:45',
+      sunday: '05:45 - 23:45',
+    },
+    FrequencyMins: {
+      peak: '4 - 7 min',
+      offPeak: '7 - 11 min',
+    },
+    Stops: [
+      { StopSequence: 1, BusStopCode: '44009', RoadName: 'Choa Chu Kang Loop', Description: 'Choa Chu Kang Int', DistanceKm: 0.0, Latitude: 1.385412, Longitude: 103.744152 },
+      { StopSequence: 6, BusStopCode: '44539', RoadName: 'Bt Panjang Rd', Description: 'Blk 223', DistanceKm: 4.8, Latitude: 1.378124, Longitude: 103.770214 },
+      { StopSequence: 12, BusStopCode: '40051', RoadName: 'Stevens Rd', Description: 'Bef Stevens Stn Exit 2', DistanceKm: 12.3, Latitude: 1.321124, Longitude: 103.826145 },
+      { StopSequence: 15, BusStopCode: '09048', RoadName: 'Orchard Rd', Description: 'Orchard Stn / Lucky Plaza', DistanceKm: 14.6, Latitude: 1.304192, Longitude: 103.834152 },
+      { StopSequence: 17, BusStopCode: '08138', RoadName: 'Orchard Rd', Description: 'Somerset Stn', DistanceKm: 15.4, Latitude: 1.300624, Longitude: 103.838914 },
+      { StopSequence: 19, BusStopCode: '08057', RoadName: 'Orchard Rd', Description: 'Dhoby Ghaut Stn', DistanceKm: 16.2, Latitude: 1.299214, Longitude: 103.844912 },
+      { StopSequence: 20, BusStopCode: '04168', RoadName: 'Stamford Rd', Description: 'SMU', DistanceKm: 16.8, Latitude: 1.295244, Longitude: 103.850125 },
+      { StopSequence: 22, BusStopCode: '04222', RoadName: 'Eu Tong Sen St', Description: 'Clarke Quay Stn Exit E', DistanceKm: 17.9, Latitude: 1.288514, Longitude: 103.847124 },
+      { StopSequence: 24, BusStopCode: '05013', RoadName: 'New Bridge Rd', Description: 'Chinatown Stn Exit E', DistanceKm: 18.7, Latitude: 1.284752, Longitude: 103.844318 },
+      { StopSequence: 28, BusStopCode: '10009', RoadName: 'Spooner Rd', Description: 'Kampong Bahru Ter', DistanceKm: 20.9, Latitude: 1.275812, Longitude: 103.834124 },
+    ],
+    ActiveBuses: [
+      {
+        id: '190-bus-1',
+        serviceNo: '190',
+        operator: 'SMRT',
+        latitude: 1.3021,
+        longitude: 103.8365,
+        currentStopCode: '09048',
+        nextStopCode: '08138',
+        nextArrivalMins: 2,
+        load: 'SDA',
+        type: 'DD',
+        feature: 'WAB',
+        speed: 28,
+        bearing: 135,
+      },
+      {
+        id: '190-bus-2',
+        serviceNo: '190',
+        operator: 'SMRT',
+        latitude: 1.3155,
+        longitude: 103.8291,
+        currentStopCode: '40051',
+        nextStopCode: '09048',
+        nextArrivalMins: 7,
+        load: 'SEA',
+        type: 'DD',
+        feature: 'WAB',
+        speed: 38,
+        bearing: 140,
+      },
+      {
+        id: '190-bus-3',
+        serviceNo: '190',
+        operator: 'SMRT',
+        latitude: 1.2862,
+        longitude: 103.8458,
+        currentStopCode: '04222',
+        nextStopCode: '05013',
+        nextArrivalMins: 1,
+        load: 'LSD',
+        type: 'BD',
+        feature: 'WAB',
+        speed: 22,
+        bearing: 195,
+      },
+    ],
+  },
+  '61': {
+    ServiceNo: '61',
+    Operator: 'SMRT',
+    Direction: 1,
+    Origin: 'Bukit Batok Int',
+    Destination: 'Eunos Int',
+    Category: 'Trunk',
+    OperatingHours: {
+      weekday: '05:30 - 23:30',
+      saturday: '05:30 - 23:30',
+      sunday: '05:45 - 23:30',
+    },
+    FrequencyMins: {
+      peak: '8 - 12 min',
+      offPeak: '12 - 16 min',
+    },
+    Stops: [
+      { StopSequence: 1, BusStopCode: '43009', RoadName: 'Bt Batok Central', Description: 'Bt Batok Int', DistanceKm: 0.0, Latitude: 1.349814, Longitude: 103.749512 },
+      { StopSequence: 14, BusStopCode: '11389', RoadName: 'North Buona Vista Rd', Description: 'Buona Vista Stn Exit C', DistanceKm: 9.8, Latitude: 1.307124, Longitude: 103.790412 },
+      { StopSequence: 26, BusStopCode: '05013', RoadName: 'New Bridge Rd', Description: 'Chinatown Stn Exit E', DistanceKm: 18.2, Latitude: 1.284752, Longitude: 103.844318 },
+      { StopSequence: 28, BusStopCode: '04222', RoadName: 'Eu Tong Sen St', Description: 'Clarke Quay Stn Exit E', DistanceKm: 19.1, Latitude: 1.288514, Longitude: 103.847124 },
+      { StopSequence: 32, BusStopCode: '01012', RoadName: 'Victoria St', Description: 'Hotel Grand Pacific', DistanceKm: 21.0, Latitude: 1.296838, Longitude: 103.852936 },
+      { StopSequence: 34, BusStopCode: '01112', RoadName: 'Victoria St', Description: 'Bugis Stn Exit A', DistanceKm: 21.8, Latitude: 1.300649, Longitude: 103.856012 },
+      { StopSequence: 46, BusStopCode: '82009', RoadName: 'Sims Ave', Description: 'Eunos Int', DistanceKm: 28.5, Latitude: 1.319514, Longitude: 103.903124 },
+    ],
+    ActiveBuses: [
+      {
+        id: '61-bus-1',
+        serviceNo: '61',
+        operator: 'SMRT',
+        latitude: 1.2982,
+        longitude: 103.8542,
+        currentStopCode: '01012',
+        nextStopCode: '01112',
+        nextArrivalMins: 3,
+        load: 'SEA',
+        type: 'SD',
+        feature: 'WAB',
+        speed: 31,
+        bearing: 45,
+      },
+      {
+        id: '61-bus-2',
+        serviceNo: '61',
+        operator: 'SMRT',
+        latitude: 1.2871,
+        longitude: 103.8462,
+        currentStopCode: '05013',
+        nextStopCode: '04222',
+        nextArrivalMins: 9,
+        load: 'SDA',
+        type: 'SD',
+        feature: 'WAB',
+        speed: 25,
+        bearing: 30,
+      },
+    ],
+  },
+  '960': {
+    ServiceNo: '960',
+    Operator: 'SMRT',
+    Direction: 1,
+    Origin: 'Woodlands Int',
+    Destination: 'Marina Centre Ter',
+    Category: 'Trunk',
+    OperatingHours: {
+      weekday: '05:30 - 23:30',
+      saturday: '05:30 - 23:30',
+      sunday: '05:45 - 23:30',
+    },
+    FrequencyMins: {
+      peak: '6 - 10 min',
+      offPeak: '10 - 14 min',
+    },
+    Stops: [
+      { StopSequence: 1, BusStopCode: '46009', RoadName: 'Woodlands Sq', Description: 'Woodlands Temp Int', DistanceKm: 0.0, Latitude: 1.437128, Longitude: 103.786512 },
+      { StopSequence: 18, BusStopCode: '44539', RoadName: 'Bt Panjang Rd', Description: 'Blk 223', DistanceKm: 14.2, Latitude: 1.378124, Longitude: 103.770214 },
+      { StopSequence: 28, BusStopCode: '01112', RoadName: 'Victoria St', Description: 'Bugis Stn Exit A', DistanceKm: 24.1, Latitude: 1.300649, Longitude: 103.856012 },
+      { StopSequence: 30, BusStopCode: '01013', RoadName: 'Victoria St', Description: 'Opp Bugis Junction', DistanceKm: 24.6, Latitude: 1.299587, Longitude: 103.855218 },
+      { StopSequence: 33, BusStopCode: '02049', RoadName: 'Raffles Ave', Description: 'The Esplanade', DistanceKm: 26.2, Latitude: 1.289712, Longitude: 103.856711 },
+      { StopSequence: 35, BusStopCode: '02099', RoadName: 'Raffles Blvd', Description: 'Marina Ctr Ter', DistanceKm: 27.0, Latitude: 1.291245, Longitude: 103.859812 },
+    ],
+    ActiveBuses: [
+      {
+        id: '960-bus-1',
+        serviceNo: '960',
+        operator: 'SMRT',
+        latitude: 1.3015,
+        longitude: 103.8565,
+        currentStopCode: '01112',
+        nextStopCode: '01013',
+        nextArrivalMins: 1,
+        load: 'SDA',
+        type: 'DD',
+        feature: 'WAB',
+        speed: 24,
+        bearing: 210,
+      },
+      {
+        id: '960-bus-2',
+        serviceNo: '960',
+        operator: 'SMRT',
+        latitude: 1.3421,
+        longitude: 103.8112,
+        currentStopCode: '44539',
+        nextStopCode: '01112',
+        nextArrivalMins: 12,
+        load: 'SEA',
+        type: 'DD',
+        feature: 'WAB',
+        speed: 46,
+        bearing: 145,
+      },
+    ],
+  },
+  '14': {
+    ServiceNo: '14',
+    Operator: 'SBST',
+    Direction: 1,
+    Origin: 'Bedok Int',
+    Destination: 'Clementi Int',
+    Category: 'Trunk',
+    OperatingHours: {
+      weekday: '05:40 - 23:45',
+      saturday: '05:40 - 23:45',
+      sunday: '05:45 - 23:45',
+    },
+    FrequencyMins: {
+      peak: '5 - 9 min',
+      offPeak: '8 - 12 min',
+    },
+    Stops: [
+      { StopSequence: 1, BusStopCode: '84009', RoadName: 'Bedok Nth Ave 1', Description: 'Bedok Int', DistanceKm: 0.0, Latitude: 1.324128, Longitude: 103.929814 },
+      { StopSequence: 10, BusStopCode: '92049', RoadName: 'Marine Parade Rd', Description: 'Parkway Parade', DistanceKm: 5.4, Latitude: 1.302148, Longitude: 103.905142 },
+      { StopSequence: 22, BusStopCode: '04121', RoadName: 'Bras Basah Rd', Description: 'NTUC Income Ctr', DistanceKm: 12.1, Latitude: 1.296615, Longitude: 103.850987 },
+      { StopSequence: 25, BusStopCode: '04111', RoadName: 'Bras Basah Rd', Description: 'Dhoby Ghaut Stn Exit B', DistanceKm: 13.0, Latitude: 1.298711, Longitude: 103.846543 },
+      { StopSequence: 28, BusStopCode: '09048', RoadName: 'Orchard Rd', Description: 'Orchard Stn / Lucky Plaza', DistanceKm: 14.8, Latitude: 1.304192, Longitude: 103.834152 },
+      { StopSequence: 38, BusStopCode: '17179', RoadName: 'Commonwealth Ave West', Description: 'Clementi Stn Exit A', DistanceKm: 23.4, Latitude: 1.315214, Longitude: 103.765124 },
+    ],
+    ActiveBuses: [
+      {
+        id: '14-bus-1',
+        serviceNo: '14',
+        operator: 'SBST',
+        latitude: 1.2974,
+        longitude: 103.8491,
+        currentStopCode: '04121',
+        nextStopCode: '04111',
+        nextArrivalMins: 4,
+        load: 'SEA',
+        type: 'DD',
+        feature: 'WAB',
+        speed: 32,
+        bearing: 310,
+      },
+    ],
+  },
+  '65': {
+    ServiceNo: '65',
+    Operator: 'SBST',
+    Direction: 1,
+    Origin: 'Tampines Int',
+    Destination: 'HarbourFront Int',
+    Category: 'Trunk',
+    OperatingHours: {
+      weekday: '05:30 - 23:45',
+      saturday: '05:30 - 23:45',
+      sunday: '05:45 - 23:45',
+    },
+    FrequencyMins: {
+      peak: '6 - 9 min',
+      offPeak: '9 - 13 min',
+    },
+    Stops: [
+      { StopSequence: 1, BusStopCode: '75009', RoadName: 'Tampines Ave 7', Description: 'Tampines Concourse Int', DistanceKm: 0.0, Latitude: 1.356124, Longitude: 103.943187 },
+      { StopSequence: 20, BusStopCode: '09048', RoadName: 'Orchard Rd', Description: 'Orchard Stn / Lucky Plaza', DistanceKm: 16.5, Latitude: 1.304192, Longitude: 103.834152 },
+      { StopSequence: 22, BusStopCode: '08138', RoadName: 'Orchard Rd', Description: 'Somerset Stn', DistanceKm: 17.3, Latitude: 1.300624, Longitude: 103.838914 },
+      { StopSequence: 24, BusStopCode: '08057', RoadName: 'Orchard Rd', Description: 'Dhoby Ghaut Stn', DistanceKm: 18.1, Latitude: 1.299214, Longitude: 103.844912 },
+    ],
+    ActiveBuses: [
+      {
+        id: '65-bus-1',
+        serviceNo: '65',
+        operator: 'SBST',
+        latitude: 1.3012,
+        longitude: 103.8375,
+        currentStopCode: '09038',
+        nextStopCode: '08138',
+        nextArrivalMins: 2,
+        load: 'SDA',
+        type: 'DD',
+        feature: 'WAB',
+        speed: 26,
+        bearing: 130,
+      },
+    ],
+  },
+};
+
+// Operator lookup for Singapore bus services
+export function getServiceOperator(serviceNo: string): BusOperator {
+  const SMRT_SERVICES = ['61', '67', '75', '167', '169', '171', '178', '180', '184', '187', '188', '190', '851', '852', '853', '854', '855', '856', '857', '858', '859', '900', '901', '903', '911', '912', '913', '920', '922', '925', '960', '961', '962', '963', '964', '965', '966', '969', '970', '972', '975', '979', '980', '981', '983', '985'];
+  const TTS_SERVICES = ['41', '49', '66', '78', '79', '96', '97', '97e', '98', '105', '106', '143', '143M', '173', '177', '183', '189', '282', '284', '285', '333', '334', '335', '941', '945', '947'];
+  const GAS_SERVICES = ['2', '3', '12', '15', '17', '34', '36', '43', '68', '82', '83', '84', '85', '118', '119', '136', '381', '382G', '382W', '386'];
+
+  if (SMRT_SERVICES.includes(serviceNo)) return 'SMRT';
+  if (TTS_SERVICES.includes(serviceNo)) return 'TTS';
+  if (GAS_SERVICES.includes(serviceNo)) return 'GAS';
+  return 'SBST';
+}
+
+// Haversine distance formula in meters
+export function calculateDistanceMeters(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371e3; // metres
+  const phi1 = (lat1 * Math.PI) / 180;
+  const phi2 = (lat2 * Math.PI) / 180;
+  const deltaPhi = ((lat2 - lat1) * Math.PI) / 180;
+  const deltaLambda = ((lon2 - lon1) * Math.PI) / 180;
+
+  const a = Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) +
+            Math.cos(phi1) * Math.cos(phi2) *
+            Math.sin(deltaLambda / 2) * Math.sin(deltaLambda / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return Math.round(R * c);
+}

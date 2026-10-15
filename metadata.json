@@ -1,0 +1,6 @@
+{
+  "name": "SG BusLive · Singapore Bus Arrivals & Tracking",
+  "description": "Live Singapore LTA bus arrival predictions, real-time GPS tracking, crowd capacity indicators, and route explorer for Singapore bus stops.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
