@@ -137,21 +137,23 @@ export class BusService {
     };
   }
 
-  // Direct LTA DataMall fetcher (via proxy or direct header if CORS allowed)
+  // Direct LTA DataMall fetcher (via serverless /api/busarrival or custom proxy)
   private async fetchLtaArrivalsDirect(busStopCode: string): Promise<ServiceArrival[] | null> {
     const endpoint = this.apiConfig.proxyUrl
-      ? `${this.apiConfig.proxyUrl.replace(/\/$/, '')}/BusArrivalv2?BusStopCode=${busStopCode}`
-      : `https://datamall2.mytransport.sg/ltaodataservice/BusArrivalv2?BusStopCode=${busStopCode}`;
+      ? `${this.apiConfig.proxyUrl.replace(/\/$/, '')}?BusStopCode=${busStopCode}`
+      : `/api/busarrival?BusStopCode=${busStopCode}`;
 
-    const res = await fetch(endpoint, {
-      headers: {
-        AccountKey: this.apiConfig.accountKey,
-        accept: 'application/json',
-      },
-    });
+    const headers: Record<string, string> = {
+      accept: 'application/json',
+    };
+    if (this.apiConfig.accountKey) {
+      headers['AccountKey'] = this.apiConfig.accountKey;
+    }
+
+    const res = await fetch(endpoint, { headers });
 
     if (!res.ok) {
-      throw new Error(`LTA API responded with HTTP ${res.status}`);
+      throw new Error(`API responded with HTTP ${res.status}`);
     }
 
     const data = await res.json();

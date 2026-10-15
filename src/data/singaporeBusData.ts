@@ -218,6 +218,15 @@ export const SINGAPORE_BUS_STOPS: BusStop[] = [
     Services: ['15', '31', '36', '43', '48', '135', '196', '197', '966'],
     Zone: 'East',
   },
+  {
+    BusStopCode: '83139',
+    RoadName: 'Bedok Sth Ave 1',
+    Description: 'Opp Bedok Sth Stn',
+    Latitude: 1.317512,
+    Longitude: 103.935124,
+    Services: ['12', '12e', '38', '47', '229'],
+    Zone: 'East',
+  },
 
   // North / Woodlands / Bishan
   {
